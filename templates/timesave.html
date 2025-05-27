@@ -1,0 +1,45 @@
+{% extends 'basic.html' %}
+{%block title%}SignUp{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+
+
+    {% if PostCategory == "All" %}
+                            <option selected value="All">All</option>
+                            {% else %}
+                            <option value="All">All</option>
+                            {% endif %}
+                            {% if PostCategory == "Image" %}
+                            <option selected value="Image">Images</option>
+                            {% else %}
+                            <option value="Image">Images</option>
+                            {% endif %}
+                            {% if PostCategory == "Video" %}
+                            <option selected value="Video">Videos</option>
+                            {% else %}
+                            <option value="Video">Videos</option>
+                            {% endif %}
+                            {% if PostCategory == "" %}
+                            <option selected value="Video">Videos</option>
+                            {% else %}
+                            <option value="Video">Videos</option>
+                            {% endif %}
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

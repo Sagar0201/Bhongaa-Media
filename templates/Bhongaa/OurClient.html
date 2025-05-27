@@ -1,0 +1,90 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}OurClient{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+    .our_client{
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding-top:8rem;
+    }
+    .our_client .our_client_div{
+        display:flex;
+        flex-flow: row wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .client{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        width: 15rem;
+        height: 15rem;
+        margin:1rem;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .client img{
+        width: 13rem;
+        /* height:15rem; */
+    }
+</style>
+
+
+{% endblock %}
+{%block body%}
+<section class="our_client">
+    <div class="our_client_div container">
+        <div class="client">
+            <img src="{%static 'images/C5.png' %}" alt="">
+        </div>
+         <div class="client">
+            <img src="{%static 'images/C4.png' %}" alt="">
+        </div>
+         <div class="client" style="background:black;">
+            <img src="{%static 'images/C8.png' %}" alt="">
+        </div>
+        
+        <div class="client">
+            <img src="{%static 'images/c1.jpg' %}" alt="">
+        </div>
+        <div class="client" style="background:black;">
+            <img src="{%static 'images/C6.png' %}" alt="">
+        </div>
+        <div class="client">
+            <img src="{%static 'images/c2.jpg' %}" alt="">
+        </div>
+        <div class="client">
+            <img src="{%static 'images/c3.png' %}" alt="">
+        </div>
+       
+       
+        <div class="client">
+            <img src="{%static 'images/C7.jpg' %}" alt="">
+        </div>
+       
+    </div>
+</section>
+
+
+
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

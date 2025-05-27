@@ -1,0 +1,318 @@
+{% extends 'basic.html' %} {% load static %} {%block title%}Bhongaa
+Media{%endblock%} {% block css %}
+<style>
+  .full-img {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .full-img img {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .full-img video {
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .full-img span {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    font-size: 30px;
+    color: coral;
+    cursor: pointer;
+  }
+
+  .all-img-div {
+    max-width: auto !important;
+    max-height: 16.5rem;
+  }
+</style>
+{%endblock%} {%block body%}
+<div class="click-closed"></div>
+
+<!--/ Carousel Star /-->
+<div class="intro intro-carousel" id="Home">
+  <div id="carousel" class="owl-carousel owl-theme">
+    <div class="carousel-item-a intro-item bg-image" style="background-image:url({% static 'images/home4.jpg' %}); background-size:cover; height:100vh;">
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-title-top">
+                    Social Media, Digital Marketing, Branding, Video & Audio
+                    Production
+                  </p>
+                  <h1 class="intro-title mb-4">
+                    <span class="color-b">Welcome</span> To <br />
+                    Bhongaa Media
+                  </h1>
+                  <p class="intro-subtitle intro-price">
+                    <a href="#Homes"><span class="price-a">Explore</span></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item-a intro-item bg-image" style="background-image:url({%static 'images/home6.jpg' %});background-size:cover; height:100vh;">
+      <!-- <video autoplay muted loop src="{%static 'images/home7.mp4' %}" style="width: 100vw;"></video> -->
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-title-top">
+                    Social Media, Digital Marketing, Branding, Video & Audio
+                    Production
+                  </p>
+                  <h1 class="intro-title mb-4">
+                    <span class="color-b">Welcome</span> To <br />
+                    Bhongaa Media
+                  </h1>
+                  <p class="intro-subtitle intro-price">
+                    <a href="#Homes"><span class="price-a">Explore</span></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item-a intro-item bg-image home_background" style="background-image:url({%static 'images/home.jpg' %});background-size:cover; height:100vh;" ">
+      <!-- <video autoplay muted loop src="{%static 'images/home7.mp4' %}" class="home_background1"></video> -->
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-subtitle intro-price">
+                    <a href="#Homes"><span class="price-a">Explore</span></a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ Carousel end /-->
+
+<!--/ Intro Single star /-->
+{% if posts %}
+<section class="intro-single" id="Posts">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">Recent Posts</h1>
+          <span class="color-text-a">Grid Posts</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'allposts' %}">All Posts</a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<!--/ Intro Single End /-->
+<!--/ Property Grid Star /-->
+<section class="property-grid grid">
+  <div class="full-img" id="fullImgBox">
+    <img alt="" id="fullImg" />
+    <video controls alt="" id="fullVideo"></video>
+    <span onclick="closeFullImg()">X</span>
+  </div>
+  <div class="container">
+    <div class="row" style="
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 2em;
+      ">
+      {% for post in posts %}
+
+      <div class="col-md-4" style="max-width: 30rem" data-aos="zoom-in-right" data-aos-duration="1500"
+        data-aos-delay="300" data-aos-offset="50">
+        <div class="card-box-a card-shadow">
+          <div class="img-box-a" style="
+              max-width: 30rem;
+              display: flex;
+              align-center: center;
+              justify-content: center;
+            ">
+            {% if post.file_type == "Image" %}
+            <img src="{{post.file.url}}" alt="" class="img-a img-fluid all-img-div" id="{{post.id}}" />
+            {% else %}
+            <video src="{{post.file.url}}" alt="" class="img-a img-fluid" id="{{post.id}}" style="width: 28rem"></video>
+            {% endif %}
+          </div>
+          <div class="card-overlay">
+            <div class="card-overlay-a-content">
+              <div class="card-header-a">
+                <h2 class="card-title-a">
+                  <a style="text-transform: capitalize"
+                    onclick="openFullImg({{post.id}},'{{post.file_type}}')">{{post.Title}}</a>
+                </h2>
+              </div>
+              <div class="card-body-a">
+                <a href="{% url 'post' %}?post={{post.id}}" class="link-a">Click here to view
+                  <span class="ion-ios-arrow-forward"></span>
+                </a>
+              </div>
+              <div class="card-footer-a">
+                <ul class="card-info d-flex justify-content-around">
+                  <p style="
+                      padding: 0 0.5em;
+                      text-align: center;
+                      color: #fff;
+                      text-transform: capitalize;
+                    ">
+                    {{post.Description}}
+                  </p>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endfor %}
+    </div>
+  </div>
+</section>
+<!--/ Property Grid End /-->
+<!--/ Intro Single star /-->
+<section class="intro-single" id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">Our Amazing Services</h1>
+          <span class="color-text-a">Grid Services</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+<!--/ Services Star /-->
+<section class="section-services">
+  <div class="container">
+    <div class="services-div">
+      <div class="service">
+        <div class="service-img">
+          <img src="{% static 'logos/design.webp' %}" alt="" />
+        </div>
+        <div class="service-titile">
+          <h1>Designing</h1>
+        </div>
+        <div class="service-desc">
+          <p>
+            We design a professional logo for your brand, freelance designs for
+            your business and much more things in designing world
+          </p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-img">
+          <img src="{% static 'logos/digitalM.png' %}" alt="" />
+        </div>
+        <div class="service-titile">
+          <h1>Digital Markting</h1>
+        </div>
+        <div class="service-desc">
+          <p>
+            We give perfect solution for your business in this advance digital
+            era because for modern problems you need modern solutions.
+          </p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-img">
+          <img src="{% static 'logos/V.png' %}" alt="" />
+        </div>
+        <div class="service-titile">
+          <h1>Video production</h1>
+        </div>
+        <div class="service-desc">
+          <p>
+            In video production, we give you everything from preproduction to
+            postproduction Creative video ads, Documentaries, photo videos,
+            Animation videos, Graphic vidoes etc.
+          </p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-img">
+          <img src="{% static 'logos/ab.png' %}" alt="" />
+        </div>
+        <div class="service-titile">
+          <h1>Advertising and Branding</h1>
+        </div>
+        <div class="service-desc">
+          <p>
+            Branding is a longer and slower process. We will give you identity
+            through advertising and branding for great business because more you
+            become a brand more you grow your business
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Services End /-->
+
+{%endblock%} {% block js %}
+<script>
+  var fullImgBox = document.getElementById("fullImgBox");
+  var fullImg = document.getElementById("fullImg");
+  var fullVideo = document.getElementById("fullVideo");
+
+  function openFullImg(pic, Ftype) {
+    fullImgBox.style.display = "flex";
+    if (Ftype === "Image") {
+      fullVideo.style.display = "none";
+      fullImg.style.display = "block";
+      fullImg.src = document.getElementById(pic).src;
+    } else {
+      fullImg.style.display = "none";
+      fullVideo.style.display = "block";
+      fullVideo.src = document.getElementById(pic).src;
+    }
+  }
+
+  function closeFullImg(pic) {
+    fullImgBox.style.display = "none";
+  }
+</script>
+{% endblock %}

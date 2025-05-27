@@ -1,0 +1,131 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}Contact Us{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<!--/ Intro Single star /-->
+<section class="intro-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box">
+                    <h1 class="title-single">We Do Great Works For Creative Folks</h1>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}#Home">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            About
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Intro Single End /-->
+
+<!--/ About Star /-->
+<section class="section-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="about-img-box">
+                    <img src="{% static 'images/about-1.jpg' %}" alt="" class="img-fluid" data-aos="zoom-in-right"
+                        data-aos-duration="1500" data-aos-delay="300" data-aos-offset="50">
+                </div>
+                <div class="sinse-box">
+                    <h3 class="sinse-title">Bhongaa<span style="color:black;padding-left:0.5rem;background: #fff;">Media Team</span>
+                    </h3>
+                    <p>Social Media, Digital Marketing, Branding, Audio & Video  Production</p>
+                </div>
+            </div>
+            <div class="team-div container">
+                <div class="person-div">
+                    <div class="person-img">
+                        <img src="{%static 'images/ritesh.jpg' %}" alt="">
+                    </div>
+                    <div class="person-name">
+                        <h1>Ritesh</h1>
+                    </div>
+                </div>
+                <div class="person-div">
+                    <div class="person-img">
+                        <img src="{%static 'images/tushar.jpg' %}" alt="">
+                    </div>
+                    <div class="person-name">
+                        <h1>Tushar</h1>
+                    </div>
+                </div>
+                <div class="person-div">
+                    <div class="person-img">
+                        <img src="{%static 'images/rahul.jpg' %}" alt="">
+                    </div>
+                    <div class="person-name">
+                        <h1>Rahul</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 section-t8">
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <img src="{% static 'images/home.png' %}" alt="" class="img-fluid" class="img-fluid"
+                            data-aos="flip-left" data-aos-duration="1500" data-aos-delay="300" data-aos-offset="50">
+                    </div>
+                    <div class="col-lg-2  d-none d-lg-block">
+                        <div class="title-vertical d-flex justify-content-start">
+                            <span>BhongaaMedia Digital Marketing</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 section-md-t3">
+                        <div class="title-box-d">
+                            <h3 class="title-d">The
+                                <span class="color-b">Bhongaa</span> Media
+                                <br> Digital Marketing.
+                            </h3>
+                        </div>
+                        <p class="color-text-a">
+                            Bhongaa is an Interactive media agency (Social Media, Digital Marketing, Branding, Audio & Video
+                             Production).
+                        </p>
+                        <p class="color-text-a">
+                            A tight-knit team of creators, doers, organizers, and
+                            overall
+                            talented souls.We are lucky
+                            enough to create something beautiful almost every other day, build brands, design websites,
+                            videos and audios and
+                            all types of advertisement for talented people from all around the world.
+                        </p>
+                        <p class="color-text-a">
+                            We strategically
+                            help our clients visualize,
+                            identify and formulate opportunities to increase their business. We immerse ourselves in the
+                            mindset of our clients to
+                            gauge their needs and fulfill their expectations."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ About End /-->
+
+
+
+{%endblock%}

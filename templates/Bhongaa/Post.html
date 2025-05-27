@@ -1,0 +1,85 @@
+{% extends 'basic.html' %}
+{%block title%}Rental{%endblock%}
+{% block css %}
+<style>
+
+.full-img-div{
+    height:70vh;
+    max-width:100%;
+    width: auto;
+}
+.owl-carousel .owl-item img {
+    width:auto !important;
+}
+@media (max-width: 576px) {
+.full-img-div{
+    height:auto !important;
+}
+.owl-carousel .owl-item img {
+    width:100% !important;
+    max-height:auto !important;
+}
+}
+
+</style>
+
+{% endblock %}
+
+{%block body%}
+<!--/ Intro Single star /-->
+{% for post in posts %}
+<section class="intro-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box">
+                    <h1 class="title-single" style=>{{post.Title}}</h1>
+                    <span class="color-text-a">{{post.Description}}</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'allposts' %}">All Posts</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{Rental.home_name}}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Intro Single End /-->
+
+<!--/ Property Single Star /-->
+<section class="property-single nav-arrow-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
+                    <div class="carousel-item-b" style="display:flex;align-items:center;justify-content:center;">
+                        {% if post.file_type == "Image" %}
+                        <img src="{{post.file.url}}" alt="" class="full-img-div">
+                        {% else %}
+                        <video src="{{post.file.url}}" alt="" controls style="max-height:80vh;max-width:100%;"></video>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--/ Property Single End /-->
+{% endfor %}
+
+
+{%endblock%}

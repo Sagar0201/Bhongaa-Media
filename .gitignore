@@ -1,0 +1,17 @@
+# Ignore Python & Django specific files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+env/
+*.env
+/staticfiles/
+/media/
+/migrations/
+
+# IDE & OS files
+.vscode/
+.DS_Store
+*.log

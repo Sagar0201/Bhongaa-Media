@@ -1,0 +1,208 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}All Posts{%endblock%}
+{%block css%}
+<style>
+    .full-img {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
+    }
+
+    .full-img img {
+        width: 95%;
+        max-width: 30rem;
+    }
+
+    .full-img video {
+        width: 95%;
+        max-width: 30rem;
+    }
+
+    .full-img span {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        font-size: 30px;
+        color: coral;
+        cursor: pointer;
+    }
+    .all-img-div{
+        max-width:auto !important;
+        max-height:16.5rem;
+    }
+</style>
+{%endblock%}
+
+{%block body%}
+<!--/ Intro Single star /-->
+<section class="intro-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box">
+                    <h1 class="title-single">Our Amazing Posts</h1>
+                    <span class="color-text-a">Posts Rentals</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Posts Grid
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Intro Single End /-->
+
+<!--/ Property Grid Star /-->
+
+<section class="property-grid grid">
+    <div class="full-img" id="fullImgBox">
+        <img alt="" id="fullImg">
+        <video controls alt="" id="fullVideo"></video>
+        <span onclick="closeFullImg()">X</span>
+    </div>
+    <div class="container">
+        <div class="row" style="display: flex;align-items: center;justify-content:space-evenly;">
+
+            <div class="col-sm-12">
+                <div class="grid-option">
+                    <form action="/%2Fallposts" method="get">
+                        <select class="custom-select" name="PostCategory">
+                            {% for Category in PostCategorys %}
+                                {% if Category == PostCategory %}
+                                <option selected value="{{Category}}">{{Category}}</option>
+                                {% else %}
+                                <option value="{{Category}}">{{Category}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-b-n color-b">Filter</button>
+
+                    </form>
+                </div>
+            </div>
+            {% for post in posts %}
+            <div class="col-md-4" style="max-width:30rem;" data-aos="flip-left" data-aos-duration="1500"
+                data-aos-delay="300" data-aos-offset="50">
+                <div class="card-box-a card-shadow">
+                    <div class="img-box-a" style="max-width:30rem; display: flex; align-center:center;justify-content:center;">
+                        {% if post.file_type == "Image" %}
+                        <img src="{{post.file.url}}" alt="" class="img-a img-fluid all-img-div"
+                            id="{{post.id}}">
+                        {% else %}
+                        <video src="{{post.file.url}}" alt="" class="img-a img-fluid" id="{{post.id}}"
+                            style="width:28rem;"></video>
+                        {% endif %}
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-overlay-a-content">
+                            <div class="card-header-a">
+                                <h2 class="card-title-a">
+                                    <a style="text-transform: capitalize;"
+                                        onclick="openFullImg({{post.id}},'{{post.file_type}}')">{{post.Title}}</a>
+                                </h2>
+                            </div>
+                            <div class="card-body-a">
+
+                                <a href="{% url 'post' %}?post={{post.id}}" class="link-a">Click here to view
+                                    <span class="ion-ios-arrow-forward"></span>
+                                </a>
+                            </div>
+                            <div class="card-footer-a">
+                                <ul class="card-info d-flex justify-content-around">
+                                    <p
+                                        style="padding: 0 0.5em; text-align: center;color: #fff;text-transform: capitalize;">
+                                        {{post.Description}}
+                                    </p>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="pagination-a">
+                    <ul class="pagination justify-content-end">
+                        {% if posts.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="{% url 'allposts' %}?PostCategory={{PostCategory}}&page={{posts.previous_page_number}}">
+                                <span class="ion-ios-arrow-back"></span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if posts.has_previous %}
+                        <li class="page-item active">
+                            <a class="page-link">{{posts.previous_page_number}}</a>
+                        </li>
+                        {% endif %}
+                        <li class="page-item active">
+                            <a class="page-link">{{posts.number}}</a>
+                        </li>
+                        {% if home_rentals.has_next %}
+                        <li class="page-item active">
+                            <a class="page-link">{{posts.next_page_number}}</a>
+                        </li>
+                        {% endif %}
+                        {% if posts.has_next %}
+                        <li class="page-item next">
+                            <a class="page-link"
+                                href="{% url 'allposts' %}?PostCategory={{PostCategory}}&page={{posts.next_page_number}}">
+                                <span class="ion-ios-arrow-forward"></span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--/ Property Grid End /-->
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+    var fullImgBox = document.getElementById('fullImgBox');
+    var fullImg = document.getElementById('fullImg');
+    var fullVideo = document.getElementById('fullVideo');
+    function openFullImg(pic, Ftype) {
+        fullImgBox.style.display = "flex";
+        if (Ftype === "Image") {
+            fullVideo.style.display = "none"
+            fullImg.style.display = "block"
+            fullImg.src = document.getElementById(pic).src;
+        } else {
+            fullImg.style.display = "none"
+            fullVideo.style.display = "block"
+            fullVideo.src = document.getElementById(pic).src;
+        }
+    }
+    function closeFullImg(pic) {
+        fullImgBox.style.display = "none";
+    }
+</script>
+{% endblock %}

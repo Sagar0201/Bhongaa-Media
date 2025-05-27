@@ -1,0 +1,360 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}SignUp{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+
+
+    body {
+        background: -webkit-linear-gradient(-135deg, #fff, #ff9068);
+        background: -o-linear-gradient(135deg, #ff9068, #fff);
+        background: -moz-linear-gradient(-135deg, #ff9068, #fff);
+        background: linear-gradient(-135deg, #fff, #ff9068);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    .main-div {
+        background: #fff;
+    }
+
+    .profile-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 40px;
+        border: 1px solid #444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        color: coral;
+    }
+
+    .profile-image img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .settings-tray {
+        background: #eee;
+        padding: 10px 15px;
+        border-radius: 7px;
+        display: flex;
+    }
+
+    .settings-tray.no-gutters {
+        padding: 0;
+    }
+
+    .settings-tray--right {
+        float: right;
+    }
+
+    .settings-tray i {
+        margin-top: 10px;
+        font-size: 25px;
+        color: #fff;
+        margin-left: 14px;
+        transition: .3s;
+    }
+
+    .settings-trays:hover {
+        color: blue;
+        cursor: pointer;
+    }
+
+
+
+
+    .search-box {
+        background: #fafafa;
+        padding: 10px 13px;
+        border: 1px solid rgba(0, 0, 0, .1);
+    }
+
+    .search-box .input-wrapper {
+        border-radius: 40px;
+    }
+
+    .input-wrapper i {
+        color: #fff;
+        vertical-align: middle;
+        cursor: pointer;
+        font-size: 1.4em;
+    }
+
+
+
+    input {
+        border: none;
+        border-radius: 30px;
+        width: 80%;
+
+    }
+
+    input::placeholder {
+        color: rgba(102, 102, 102, 0.61);
+        font-weight: 500;
+        margin-left: 20px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+
+    .friend-drawer {
+        padding: 10px 15px;
+        display: flex;
+        vertical-align: baseline;
+        background: #fff;
+        transition: .3s ease;
+    }
+
+    .friend-drawer--grey {
+        background: #eee;
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+    .time {
+        color: grey;
+    }
+
+    .time--onhover:hover {
+        background: blue;
+        cursor: pointer;
+    }
+
+    .time p,
+    h6,
+    .time {
+        color: #444;
+    }
+
+
+
+    .text {
+        margin-left: 15px;
+        width: 85%;
+    }
+
+    .text h6 {
+        margin-top: 6px;
+        margin-bottom: 0;
+    }
+
+    .text p {
+        margin: 0;
+    }
+
+
+    hr {
+        margin: 5px auto;
+        width: 60%;
+    }
+
+    .chat-bubble {
+        padding: 10px 14px;
+        background: #eee;
+        margin: 10px 30px;
+        border-radius: 9px;
+        position: relative;
+        animation: fadeIn 1s ease-in;
+    }
+
+    .chat-bubble:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 20px solid transparent;
+        border-bottom: 0;
+        margin-top: -10px;
+    }
+
+
+    .chat-bubble--left:after {
+        left: 0;
+        border-right-color: #eee;
+        border-left: 0;
+        margin-left: -20px;
+    }
+
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+
+    .offset-md-9 .chat-bubble {
+        background: blue;
+        color: #fff;
+    }
+
+
+    .messages {
+        margin-top: 8rem;
+    }
+
+    .messages-div {
+        height: 80vh;
+        overflow: auto;
+    }
+
+    .user-messages {
+        height: 80vh;
+        overflow: auto;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 700px) {
+        .messages-div {
+            max-height: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .user-messages {
+            max-height: 100%;
+            height: 10rem;
+            overflow: auto;
+            width: 100%;
+        }
+    }
+
+    .message {
+        display: inline-block;
+    }
+
+    .text button {
+        border: none;
+        background: transparent;
+    }
+
+    .no_messages {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .no_messages span {
+        color: #ff6700;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="messages ">
+    <div class="container main-div">
+        <div class="row no-gutters">
+            <div class="col-md-4 border-right ">
+                <div class="settings-tray">
+                    <div class="profile-image">
+                        <img src="{% static 'images/home.png' %}" alt="">
+                    </div>
+                    <div class="text">
+                        <h6>Bhongaa Media</h6>
+                        <p class="text-muted">Hi, wanna see something?</p>
+                    </div>
+
+                </div>
+                <div class="messages-div">
+                    <div class="search-box">
+                        <div class="input-wrapper">
+                            <form action="/Messages/" method="get">{% csrf_token %}
+                                <input placeholder="Search here" type="text" name="Query">
+                                <button class="btn btn-b-n"><i class="material-icons fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    {% for message in contact_message %}
+                    <div class="friend-drawer friend-drawer--onhover">
+                        <div class="profile-image">
+                            {{message.name.0}}
+
+                        </div>
+                        <div class="text">
+                            <form action="/Messages/" method="post">{% csrf_token %}
+                                <input type="hidden" name="message_id" value="{{message.id}}">
+                                <button>
+                                    <h6>{{message.name}}</h6>
+                                    <p class="text-muted">{{message.email_address}}</p>
+                                </button>
+                            </form>
+                        </div>
+                        <span class="time text-muted small">{{message.timestamp.time}}</span>
+                    </div>
+                    <hr>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                {% if sender_message %}
+                {% for message_info in sender_message %}
+                <div class="settings-tray">
+                    <div class="friend-drawer no-gutters friend-drawer--grey">
+                        <div class="profile-image">
+                            {{message_info.name.0}}
+                        </div>
+
+                        <div class="text text-center">
+                            <h6>{{message_info.name}}</h6>
+                            <p class="text-muted">{{message_info.email_address}}</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="chat-panel">
+                    <div class="row no-gutters">
+                        <div class="user-messages">
+                            <div class="message">
+                                <div class="chat-bubble chat-bubble--left">
+                                    {{message_info.message}}
+                                </div>
+                            </div><br>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="no_messages">
+                    <h1 class="font-a">Welcome<br> To <span class="font-a">Bhongaa</span>Media</h1>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,253 @@
+{% extends 'basic.html' %} {% load static %} {%block title%}profile{%endblock%}
+{% block css %}
+<style>
+  .navbar-default.navbar-reduce {
+    display: none;
+  }
+
+  .navbar-default.navbar-trans,
+  .navbar-default.navbar-reduce {
+    display: none;
+  }
+
+  footer {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 0px;
+    background: transparent;
+  }
+
+  .profile_page {
+    width: 100%%;
+    height: 100vh;
+    display: flex;
+  }
+
+  .links {
+    min-width: 18rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  }
+
+  .profile_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    flex-direction: column;
+  }
+
+  .profile_info h3 {
+    margin-top: 0.5em;
+  }
+
+  .profile_info img {
+    width: 10rem;
+    border-radius: 50%;
+    {% comment %} padding: 1em; {% endcomment %}
+    background: #fffafa;
+    box-shadow: inset 5px 5px 10px #c9c6c6, inset -5px -5px 10px #ffffff;
+    background: linear-gradient(-135deg, #fff, #ff9068);
+  }
+
+  .users_posts {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .post_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: block;
+    margin: 1em;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  }
+
+  .post_div:hover .post_div {
+    height: 14rem;
+  }
+
+  .post_img_vid {
+    width: auto;
+    height: 15rem;
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .post_div img,
+  video {
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    background-position: center;
+    padding: 0.1em;
+  }
+
+  .delete-inline {
+    text-align: center;
+    display: none;
+  }
+
+  @keyframes vhide {
+    0% {
+      opacity: 0;
+      height: 0;
+    }
+
+    100% {
+      opacity: 1;
+      height: 1em;
+    }
+  }
+
+  .post_div:hover .delete-inline {
+    display: flex;
+    animation-name: vhide;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .delete-inline i {
+    color: #fff;
+    font-size: 20px;
+    z-index: 2;
+    padding-right: 0.5em;
+  }
+
+  .delete-inline button {
+    border: none;
+    background: transparent;
+    margin: 0 0.5em;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 770px) and (min-width: 501px) {
+      .profile_page {
+      display: block;
+    }
+    .links {
+      flex-direction: row;
+      height:20rem;
+      box-shadow: none;
+    }
+  }
+
+
+  @media screen and (max-width: 500px) {
+    .profile_page {
+      display: block;
+    }
+    .links {
+      height: 100vh;
+      flex-direction: column;
+      box-shadow: none;
+    }
+  }
+</style>
+
+{% endblock %} {%block body%}
+<section class="profile">
+  <div>
+    <div class="profile_page">
+      <div class="links">
+        <div class="profile_info">
+          <img src="{% static 'images/home.png' %}" alt="" />
+          <h3 class="title-d font-a">Bhongaa Media</h3>
+        </div>
+        <div class="text-center">
+          <h2 class="font-a text-center">
+            {{no_posts}}<br />
+            <h5 class="title-d">Posts</h5>
+          </h2>
+          <div><a href="{% url 'home' %}#Home">Home</a></div>
+          <div><a href="{% url 'SignOut' %}">SignOut</a></div>
+          <div><a href="{% url 'Addpost' %}">Add Post</a></div>
+          <div><a href="{% url 'Messages' %}">Messages</a></div>
+          <div><a href="{% url 'change_password' %}">Change Password</a></div>
+        </div>
+      </div>
+      <div class="users_posts">
+        {% for post in posts %}
+        <div class="post_div">
+          <div class="post_img_vid">
+            {% if post.file_type == "Image" %}
+            <img
+              src="{{post.file.url}}"
+              alt=""
+              class="img-a img-fluid"
+              id="{{post.id}}"
+            />
+            {% else %}
+            <video
+              src="{{post.file.url}}"
+              controls
+              alt=""
+              class="img-a img-fluid"
+              id="{{post.id}}"
+              style="width: 20rem; height: 12rem"
+            ></video>
+            {% endif %}
+          </div>
+          <div class="delete-inline">
+            <form action="/Profile/" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="PostId" value="{{post.id}}" />
+              <button>
+                <li class="list-inline-item">
+                  <p class="link-icon">
+                    <i
+                      class="fa fa-info-circle"
+                      aria-hidden="true"
+                      style="color: black"
+                    ></i>
+                    <a>Delete</a>
+                  </p>
+                </li>
+              </button>
+            </form>
+            <button>
+              <li class="list-inline-item">
+                <p class="link-icon">
+                  <i
+                    class="fa fa-info-circle"
+                    aria-hidden="true"
+                    style="color: black"
+                  ></i>
+                  <a href="{% url 'post' %}?post={{post.id}}">Info</a>
+                </p>
+              </li>
+            </button>
+          </div>
+        </div>
+        {%endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%endblock%}
